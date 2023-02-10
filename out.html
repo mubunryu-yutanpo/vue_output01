@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLOT</title>
+    <style>
+
+    body{
+      margin: 0;
+      padding: 0;
+      background-color: #86A3B8;
+    }
+    ul,li{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    /* contents */
+    .contents{
+      width: 80%;
+      max-width: 980px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .pic{
+      margin-bottom: 25px;
+    }
+    .pic img{
+      width: 400px;
+    }
+    .contents-result{
+      font-size: 25px;
+      font-weight: bold;
+      color: rgb(245, 80, 80);
+    }
+    .contens-result-text{
+      margin: 20px 0 30px;
+    }
+
+
+    /* slot */
+
+    #slot{
+      width: 80%;
+      margin: 0 auto;
+      max-width: 980px;
+      border-radius: 20px;
+      background: rgb(232, 210, 166);
+      padding: 10px 0 50px 0;
+    }
+
+  /* パネル部分 */
+
+    .slot_panel-container{
+      width: 75%;
+      margin: 10px auto;
+      text-align: center;
+    }
+    .slot_panel-logo{
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .slot_panel-logo img{
+      border: 3px solid #86A3B8;
+      box-shadow: 0 0 5px 0 rgb(27, 26, 26);
+      vertical-align: bottom;
+      width: 350px;
+    }
+    .slot_reel-container{
+      display: flex;
+      bottom: 31%;
+      left: 75px;
+      justify-content: center;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+    .slot_image-container{
+      border: 2px solid rgb(244, 132, 132);
+      border-radius: 10px;
+      background-color: #fff;
+      padding: 15px 10px 0;
+      overflow: hidden;
+      height: 180px;
+      width: 180px;
+      margin: 0 5px;
+      text-align: center;
+    }
+    .slot_image-container img{
+      width: 150px;
+      height: 150px;
+
+    }
+    .slot_image-wrap:first-child{
+      margin-top: -1325px;
+    }
+
+  /* pushボタン */
+
+    .slot_push-wrap{
+      text-align: center;
+    }
+    .slot_btn-push{
+      margin: 30px 0;
+      padding: 30px;
+      font-size: 25px;
+      background: rgb(233, 231, 231);
+      border: 3px solid rgb(233, 231, 231);
+      color: #F55050;
+      box-shadow: 0px 8px 2px 10px #111;
+      border-radius: 15px;
+      font-weight: bold;
+      transition: all .3s;
+      transform: translateY(0);
+      cursor: pointer;
+    }
+    .slot_btn-push:hover{
+      transition: all .3s;
+      transform: translateY(5px);
+      box-shadow: 0px 4px 2px 0 rgb(44, 44, 44);
+      background-color: #F48484;
+      border: 2px solid #000;
+      color: #fff;
+    }
+    .slot_btn-msg{
+      bottom: 0%;
+      left: 30%;
+      width: 100px;
+      height: 100px;
+    }
+    .slot_btn-msg img{
+      height: 100%;
+    }
+
+  /* playエリア */
+
+    .slot_play-container{
+      display: flex;
+      position: relative;
+    }
+
+    /* BETボタン */
+    .slot_maxbet-wrap{
+      position: absolute;
+      top: -110px;
+      left: 20%;
+    }
+    .slot_maxbet-btn{
+      background-color: #F55050;
+      border: 1px solid rgb(134, 163, 184);
+      border-radius: 100%;
+      box-shadow: 0 0 7px 0 rgb(43, 39, 39);
+      color: #fff;
+      cursor: pointer;
+      height: 85px;
+      width: 100px;
+      font-size: 18px;
+    }
+    .slot_maxbet-btn.beted{
+      background-color: rgb(244, 132, 132);
+    }
+
+    /* レバー */
+
+    .slot_lever-btn{
+      background: #111010;
+      border: 3px solid #333;
+      border-radius: 100%;
+      width: 60px;
+      height: 60px;
+      transition: all .1s;
+      cursor: pointer;
+      position: absolute;
+      z-index: 3;
+      left: 10%;
+      bottom: 10%;
+    }
+    .slot_lever-btn.on{
+      transition: all .1s;
+      transform: translateY(20px);
+    }
+    .slot_lever-back{
+        content: '';
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+        background-color: rgb(67, 67, 91);
+        position: absolute;
+        z-index: 1;
+        left: 10%;
+        bottom: 10%;
+    }
+
+    /* ストップボタン */
+
+    .slot_button-wrap{
+      width: 55%;
+      margin: 0 auto;
+    }
+    .slot_button-stop{
+      width: 80px;
+      height: 80px;
+      border-radius: 100%;
+      border: 1px solid rgb(170, 170, 170);
+      background-color: rgba(254, 67, 92, 0.8);
+      cursor: pointer;
+      margin: 0 10px;
+    }
+    .stoped{
+      background-color: rgb(143, 189, 252);
+    }
+
+    </style>
+</head>
+<body>
+        <!-- slot -->
+        <div id="slot">
+
+          <!-- おみくじの結果画面 -->
+          <div class="contents" v-show="resultOpenFlg === true">
+     
+            <ul>
+              <li v-for="results in result" v-show="results.showFlg === true" class="contents-list">
+                <div class="pic">
+                  <img :src="results.picture" alt="">
+                </div>
+                <span class="contents-result">{{ results.luck }}</span>
+                <p class="contents-result-text">{{ results.text }}</p>
+              </li>
+            </ul>
+          </div>
+ 
+
+          <!-- パネル部分 -->
+            <div class="slot_panel-container" v-show="!resultOpenFlg">
+              <div class="slot_panel-logo">
+                <img src="public/img/logo.png" alt="">
+              </div>
+            </div>
+
+            <!-- リール -->
+            <div class="slot_reel-container">
+              <div class="slot_image-container reel1">
+                <img :src="image" ref="img1">
+              </div>
+              <div class="slot_image-container reel2">
+                <img :src="image" ref="img2">
+              </div>
+              <div class="slot_image-container reel3">
+                <img :src="image" ref="img3">
+              </div>  
+            </div>
+
+            <!-- ユーザーが触る部分 -->
+            <div class="slot_use-container">
+
+              <!-- リセットボタン -->
+              <div class="slot_push-wrap">
+                <button class="slot_btn-push" @click="reelStop" v-show="!resultOpenFlg">STOP</button>
+              </div>
+
+              <!-- play -->
+              <div class="slot_play-container">
+
+                <!-- BETボタン -->
+                <div class="slot_maxbet-wrap">
+                  <button class="slot_maxbet-btn" :class={beted:maxbetFlg} @click="onBet" v-show="!resultOpenFlg">BET</button>
+                </div>
+
+                <!-- レバー（スタート用） -->
+                <div class="slot_lever-wrap">
+                  <button class="slot_lever-btn" :class={on:leverFlg} @click="slotStart" v-show="!resultOpenFlg"></button>
+                  <div class="slot_lever-back" v-show="!resultOpenFlg"></div>
+                </div>
+
+                <!-- ストップボタン
+                <div class="slot_button-wrap">
+                  <button class="slot_button-stop" :class="{stoped: stopbtnFlg}" ref="stop_btn1" @click="reelStop"></button>
+                  <button class="slot_button-stop" :class="{stoped: stopbtnFlg}" ref="stop_btn2" @click="reelStop"></button>
+                  <button class="slot_button-stop" :class="{stoped: stopbtnFlg}" ref="stop_btn3" @click="reelStop"></button>
+                </div> -->
+
+              </div> <!--slot_play-->
+          </div> <!--slot_user-->
+
+        </div><!--slot-->
+<script src="dist/js/bundle.js"></script>
+</body>
+</html>
