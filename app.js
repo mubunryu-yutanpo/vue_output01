@@ -91,8 +91,8 @@ new Vue({
       //画像をランダムに取得する
       getReelImg: function(){
         let randomIndex = Math.floor(Math.random() * this.result.length);
-        this.image = this.result[randomIndex].slot;
         this.getResult = this.result[randomIndex];
+        this.image = this.getResult.slot;
       },
 
       //スロットスタート
