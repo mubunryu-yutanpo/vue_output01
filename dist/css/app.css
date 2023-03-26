@@ -1,0 +1,90 @@
+body{
+  width: 80%;
+  max-width: 980px;
+  margin: 0 auto;
+  background-color: #f6f5f4;
+  text-align: center;
+}
+input{
+  padding: 15px 20px;
+  border: 1px solid #e8e8e8;
+  cursor: pointer;
+  margin: 30px 0;
+  width: 40%;
+
+}
+button{
+  cursor: pointer;
+  padding: 5px;
+}
+.titleText{
+  font-size: 30px;
+  color: rgb(252, 134, 151);
+}
+.addButton{
+  background-color: rgba(4, 3, 3, 0.8);
+  color: #fff;
+  display: block;
+  font-size: 15px;
+  margin:0 28% 15px auto;
+  width: 25%;
+}
+.errmsg{
+  color: rgba(255, 0, 0, 0.8);
+  margin: 0 auto -20px;
+}
+.search{
+  position: relative;
+}
+.search i{
+  position: absolute;
+  top: 43%;
+  left: 29%;
+}
+.search input{
+  padding: 15px 0 15px 35px;
+  border-radius: 20px;
+}
+.todoTaskContainer{
+  margin: 0 auto;
+  width: 45%;
+}
+.todoTaskList{
+  padding: 0;
+  box-shadow:0 25px 50px 0 rgb(0 0 0 / 10%);
+}
+.todoTaskContainer li{
+  background-color: #fff;
+  border: 1px solid #e8e8e8;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 3px;
+  transition: all 1s;
+}
+.todoTaskContainer li:hover{
+  transition: all 1s;
+  transform: scale(1.025);
+}
+.todoTaskContainer input{
+  margin: 0 0 0 5px;
+  padding: 0;
+  width: 20px;
+}
+.todoTaskItem.comp{
+  background-color: #999;
+}
+.comp{
+  color: #fff;
+}
+.deleteBtn{
+  background: none;
+  border: none;
+  margin-right: 5px;
+}
+.deleteBtn i{
+  font-size: 19px;
+}
+.deleteBtn i:hover{
+  color: rgb(223, 79, 30);
+}
